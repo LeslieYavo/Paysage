@@ -7,6 +7,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Ellipse;
 import javafx.stage.Stage;
 
 public class PaysageFx extends Application {
@@ -67,11 +68,14 @@ public class PaysageFx extends Application {
         addCloud(root, 400, 80);
         addCloud(root, 600, 150);
 
+        // Super héroïne
+        addSuperHeroine(root, 300, 200);
+
         // Création de la scène
         Scene scene = new Scene(root, 800, 600);
 
         // Configuration de la fenêtre
-        stage.setTitle("Paysage JavaFX avec Nuages");
+        stage.setTitle("Paysage JavaFX avec Super Héroïne");
         stage.setScene(scene);
         stage.show();
     }
@@ -90,8 +94,34 @@ public class PaysageFx extends Application {
         root.getChildren().add(cloud);
     }
 
+    private void addSuperHeroine(Group root, double x, double y) {
+        Group superHeroine = new Group();
+
+        // Corps (ellipse verticale)
+        Ellipse body = new Ellipse(x, y + 20, 15, 40);
+        body.setFill(Color.RED);
+
+        // Tête (cercle)
+        Circle head = new Circle(x, y - 30, 15);
+        head.setFill(Color.PEACHPUFF);
+
+        // Cape (triangle)
+        Polygon cape = new Polygon();
+        cape.getPoints().addAll(
+                x - 20, y + 10,  // Coin gauche
+                x + 20, y + 10,  // Coin droit
+                x, y + 60        // Bas de la cape
+        );
+        cape.setFill(Color.CRIMSON);
+
+        // Ajout des parties au groupe de la super héroïne
+        superHeroine.getChildren().addAll(cape, body, head);
+
+        // Ajout de la super héroïne à la scène
+        root.getChildren().add(superHeroine);
+    }
+
     public static void main(String[] args) {
         launch();
     }
 }
-
